@@ -1,0 +1,32 @@
+syntax = "proto3";
+package com.example.deal.domain;
+option java_outer_classname = "DealDomain";
+
+message DealState {
+  string dealIdx = 1;
+  string createdTimestamp = 2;
+  string modifiedTimestamp = 3;
+  string lifecycleStatus = 4;
+  string brand = 5;
+  string channel = 6;
+}
+
+message DealSubmitted {
+  string dealIdx = 1;
+  string modifiedTimestamp = 2;
+}
+
+message DealPaid {
+  string dealIdx = 1;
+  string modifiedTimestamp = 2;
+}
+
+message DealFulfilled {
+  string dealIdx = 1;
+  string modifiedTimestamp = 2;
+}
+
+message DealCancelled {
+  string dealIdx = 1;
+  string modifiedTimestamp = 2;
+}
