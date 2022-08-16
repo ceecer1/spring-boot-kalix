@@ -1,7 +1,7 @@
-package com.example.deal.fsm;
+package com.example.fsm;
 
-import com.example.deal.util.DealEvents;
-import com.example.deal.util.DealStates;
+import com.example.util.DealEvents;
+import com.example.util.DealStates;
 import lombok.extern.java.Log;
 import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.StateMachineConfigurerAdapter;
@@ -42,7 +42,7 @@ class SimpleStateMachineConfiguration extends StateMachineConfigurerAdapter<Deal
 
     @Override
     public void configure(StateMachineConfigurationConfigurer<DealStates, DealEvents> config) throws Exception {
-        StateMachineListenerAdapter<DealStates, DealEvents> adapter = new StateMachineListenerAdapter<>() {
+        StateMachineListenerAdapter<DealStates, DealEvents> adapter = new StateMachineListenerAdapter<DealStates, DealEvents>() {
             @Override
             public void stateChanged(State<DealStates, DealEvents> from, State<DealStates, DealEvents> to) {
                 log.info(String.format("State changed (from: %s, to %s)", from + "", to + ""));

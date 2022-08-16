@@ -1,6 +1,7 @@
 package com.example.deal.view;
 
 import com.example.deal.domain.DealDomain;
+import com.example.deal.view.base.AbstractDealViewServiceView;
 import kalix.javasdk.view.View;
 import kalix.javasdk.view.ViewContext;
 
@@ -16,21 +17,13 @@ public class DealViewServiceImpl extends AbstractDealViewServiceView {
 
   @Override
   public DealViewApi.DealViewState emptyState() {
-    return null;
+    throw new UnsupportedOperationException("Not implemented yet, replace with your empty view state");
   }
 
   @Override
   public View.UpdateEffect<DealViewApi.DealViewState> onUpdateState(
     DealViewApi.DealViewState state, DealDomain.DealState dealState) {
-    DealViewApi.DealViewState newViewState =
-            DealViewApi.DealViewState.newBuilder()
-                    .setDealIdx(dealState.getDealIdx())
-                    .setCreatedTimestamp(dealState.getCreatedTimestamp())
-                    .setModifiedTimestamp(dealState.getModifiedTimestamp())
-                    .setLifecycleStatus(dealState.getLifecycleStatus())
-                    .setBrand(dealState.getBrand())
-                    .setChannel(dealState.getChannel())
-                    .build();
-    return effects().updateState(newViewState);
+    throw new UnsupportedOperationException("Update handler for 'OnUpdateState' not implemented yet");
   }
 }
+

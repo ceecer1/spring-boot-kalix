@@ -1,6 +1,7 @@
-package com.example.deal.util;
+package com.example.util;
 
 public enum DealEvents {
+
         PAY,
         FULFILL,
         CANCEL

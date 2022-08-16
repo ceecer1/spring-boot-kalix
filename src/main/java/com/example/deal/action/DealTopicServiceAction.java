@@ -1,7 +1,7 @@
 package com.example.deal.action;
 
+import com.example.deal.action.base.AbstractDealTopicServiceAction;
 import com.example.deal.domain.DealDomain;
-import kalix.javasdk.Metadata;
 import kalix.javasdk.action.ActionCreationContext;
 
 // This class was initially generated based on the .proto definition by Kalix tooling.
@@ -14,23 +14,8 @@ public class DealTopicServiceAction extends AbstractDealTopicServiceAction {
 
   public DealTopicServiceAction(ActionCreationContext creationContext) {}
 
-
   @Override
   public Effect<DealTopicApi.DealStateUpdated> dealChangeProtoToTopic(DealDomain.DealState dealState) {
-    String key = dealState.getDealIdx();
-    //var metadata = actionContext().metadata().set("ce-subject", key);
-    DealTopicApi.DealStateUpdated dealStateUpdated = DealTopicApi.DealStateUpdated.newBuilder()
-            .setDealIdx(dealState.getDealIdx())
-            .setCreatedTimestamp(dealState.getCreatedTimestamp())
-            .setModifiedTimestamp(dealState.getModifiedTimestamp())
-            .setLifecycleStatus(dealState.getLifecycleStatus())
-            .setBrand(dealState.getBrand())
-            .setChannel(dealState.getChannel())
-            .build();
-    return effects().reply(dealStateUpdated,
-            Metadata.EMPTY.set("ce-subject", key).add("ce-dataschema", actionContext().eventSubject().orElse("no schema")));
+    throw new RuntimeException("The command handler for `dealChangeProtoToTopic` is not implemented, yet");
   }
-
 }
-
-

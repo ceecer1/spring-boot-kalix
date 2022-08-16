@@ -1,4 +1,4 @@
-package com.example.deal.action;
+package com.example.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
