@@ -55,7 +55,7 @@ service DealService {
     }
   };
 
-  rpc CreateDeal (DealRequest) returns (DealStatus) {
+  rpc CreateDeal (DealRequest) returns (google.protobuf.Empty) {
     option (kalix.method).entity.key_generator = VERSION_4_UUID;
     option (google.api.http) = {
       post: "/deal/create"
