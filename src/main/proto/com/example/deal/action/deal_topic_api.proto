@@ -22,7 +22,7 @@ service DealTopicService {
 
   rpc dealChangeProtoToTopic(com.example.deal.domain.DealState) returns (DealStateUpdated) {
     option (kalix.method).eventing.in = {
-      value_entity: "deals"
+      event_sourced_entity: "deals"
     };
     option (kalix.method).eventing.out = {
       topic:  "deal_changes_proto3"
@@ -36,5 +36,6 @@ message DealStateUpdated {
   string modifiedTimestamp = 3;
   string lifecycleStatus = 4;
   string brand = 5;
-  string channel = 6;
+  string changedBy = 6;
+  string status = 7;
 }

@@ -10,6 +10,7 @@ public class DealKeyValueMessage {
     public final String lifecycleStatus;
     public final String brand;
     public final String channel;
+    public final String status;
 
     @JsonCreator
     public DealKeyValueMessage(
@@ -18,13 +19,15 @@ public class DealKeyValueMessage {
             @JsonProperty("modifiedTimestamp") String modifiedTimestamp,
             @JsonProperty("lifecycleStatus") String lifecycleStatus,
             @JsonProperty("brand") String brand,
-            @JsonProperty("channel") String channel) {
+            @JsonProperty("channel") String channel,
+            @JsonProperty("channel") String status) {
         this.dealIdx = dealIdx;
         this.createdTimestamp = createdTimestamp;
         this.modifiedTimestamp = modifiedTimestamp;
         this.lifecycleStatus = lifecycleStatus;
         this.brand = brand;
         this.channel = channel;
+        this.status = status;
     }
 
     @Override
@@ -36,6 +39,7 @@ public class DealKeyValueMessage {
                 "lifecycleStatus=" + lifecycleStatus +
                 "brand=" + brand +
                 "channel=" + channel +
+                "status=" + status +
                 '}';
     }
 }

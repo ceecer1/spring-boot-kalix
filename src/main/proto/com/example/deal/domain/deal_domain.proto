@@ -8,25 +8,30 @@ message DealState {
   string modifiedTimestamp = 3;
   string lifecycleStatus = 4;
   string brand = 5;
-  string channel = 6;
+  string changedBy = 6;
+  string status = 7;
 }
 
 message DealSubmitted {
   string dealIdx = 1;
-  string modifiedTimestamp = 2;
+  string status = 2;
+  string modifiedTimestamp = 3;
 }
 
 message DealPaid {
   string dealIdx = 1;
-  string modifiedTimestamp = 2;
+  string status = 2;
+  string modifiedTimestamp = 3;
 }
 
 message DealFulfilled {
   string dealIdx = 1;
-  string modifiedTimestamp = 2;
+  string status = 2;
+  string modifiedTimestamp = 3;
 }
 
 message DealCancelled {
   string dealIdx = 1;
-  string modifiedTimestamp = 2;
+  string status = 2;
+  string modifiedTimestamp = 3;
 }

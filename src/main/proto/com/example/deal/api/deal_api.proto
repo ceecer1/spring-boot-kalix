@@ -1,17 +1,19 @@
 // This is the public API offered by your entity.
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
+package com.example.deal.api;
+
 import "kalix/annotations.proto";
 import "google/api/annotations.proto";
-
-package com.example.deal.api;
+import "google/protobuf/empty.proto";
 
 option java_outer_classname = "DealApi";
 
 message DealRequest {
   string brand = 1;
-  string channel = 2;
+  string changedBy = 2;
+  string status = 3;
+  string lifecycleStatus = 4;
 }
 
 message DealStatus {
@@ -20,7 +22,18 @@ message DealStatus {
   string modifiedTimestamp = 3;
   string lifecycleStatus = 4;
   string brand = 5;
-  string channel = 6;
+  string changedBy = 6;
+  string status = 7;
+}
+
+message PayDeal {
+  string dealIdx = 1 [(kalix.field).entity_key = true];
+  string status = 2;
+}
+
+message SubmitDeal {
+  string dealIdx = 1 [(kalix.field).entity_key = true];
+  string status = 2;
 }
 
 
@@ -46,6 +59,20 @@ service DealService {
     option (kalix.method).entity.key_generator = VERSION_4_UUID;
     option (google.api.http) = {
       post: "/deal/create"
+      body: "*"
+    };
+  }
+
+  rpc Pay (PayDeal) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/deal/{dealIdx}/pay"
+      body: "*"
+    };
+  }
+
+  rpc Submit (SubmitDeal) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/deal/{dealIdx}/submit"
       body: "*"
     };
   }

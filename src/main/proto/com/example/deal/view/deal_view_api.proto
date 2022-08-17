@@ -16,7 +16,7 @@ service DealViewService {
 
   rpc OnUpdateState(com.example.deal.domain.DealState) returns (DealViewState) {
     option (kalix.method).eventing.in = {
-      value_entity: "deals"
+      event_sourced_entity: "deals"
     };
     option (kalix.method).view.update = {
       table: "deal_view_tbl"
@@ -45,6 +45,7 @@ message DealViewState {
   string lifecycleStatus = 4;
   string brand = 5;
   string channel = 6;
+  string status = 7;
 }
 
 message DealResponse {

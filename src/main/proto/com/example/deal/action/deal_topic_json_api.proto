@@ -22,7 +22,7 @@ service DealTopicJsonService {
 
   rpc dealChangeJsonToTopic(com.example.deal.domain.DealState) returns (google.protobuf.Any) {
     option (kalix.method).eventing.in = {
-      value_entity: "deals"
+      event_sourced_entity: "deals"
     };
     option (kalix.method).eventing.out = {
       topic:  "deal_changes"
