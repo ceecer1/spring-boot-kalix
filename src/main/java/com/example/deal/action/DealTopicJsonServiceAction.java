@@ -2,6 +2,7 @@ package com.example.deal.action;
 
 import com.example.deal.domain.DealDomain;
 import com.google.protobuf.Any;
+import kalix.javasdk.JsonSupport;
 import kalix.javasdk.action.ActionCreationContext;
 
 // This class was initially generated based on the .proto definition by Kalix tooling.
@@ -15,7 +16,13 @@ public class DealTopicJsonServiceAction extends AbstractDealTopicJsonServiceActi
   public DealTopicJsonServiceAction(ActionCreationContext creationContext) {}
 
   @Override
-  public Effect<Any> dealChangeJsonToTopic(DealDomain.DealState dealState) {
-    throw new RuntimeException("The command handler for `dealChangeJsonToTopic` is not implemented, yet");
+  public Effect<Any> dealChangeJsonToTopic(DealDomain.DealSubmitted dealSubmitted) {
+    DealSubmittedMessage jsonMessage =
+            new DealSubmittedMessage(
+                    dealSubmitted.getDealIdx(),
+                    dealSubmitted.getModifiedTimestamp(),
+                    dealSubmitted.getStatus());
+    Any jsonAny = JsonSupport.encodeJson(jsonMessage);
+    return effects().reply(jsonAny);
   }
 }

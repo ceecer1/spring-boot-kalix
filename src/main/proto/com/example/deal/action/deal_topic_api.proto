@@ -1,41 +1,41 @@
-syntax = "proto3";
-package com.example.deal.action;
-
-import "com/example/deal/domain/deal_domain.proto";
-import "kalix/annotations.proto";
-import "google/protobuf/any.proto";
-import "google/protobuf/empty.proto";
-
-option java_outer_classname = "DealTopicApi";
-
-service DealTopicService {
-  option (kalix.codegen) = {
-    action: {}
-  };
-
-  /*
-  rpc Consume(google.protobuf.Any) returns (google.protobuf.Empty) { // <1>
-    option (kalix.method).eventing.in = {
-      topic:  "notifications"
-    };
-  }*/
-
-  rpc dealChangeProtoToTopic(com.example.deal.domain.DealState) returns (DealStateUpdated) {
-    option (kalix.method).eventing.in = {
-      event_sourced_entity: "deals"
-    };
-    option (kalix.method).eventing.out = {
-      topic:  "deal_changes_proto3"
-    };
-  }
-}
-
-message DealStateUpdated {
-  string dealIdx = 1;
-  string createdTimestamp = 2;
-  string modifiedTimestamp = 3;
-  string lifecycleStatus = 4;
-  string brand = 5;
-  string changedBy = 6;
-  string status = 7;
-}
+//syntax = "proto3";
+//package com.example.deal.action;
+//
+//import "com/example/deal/domain/deal_domain.proto";
+//import "kalix/annotations.proto";
+//import "google/protobuf/any.proto";
+//import "google/protobuf/empty.proto";
+//
+//option java_outer_classname = "DealTopicApi";
+//
+//service DealTopicService {
+//  option (kalix.codegen) = {
+//    action: {}
+//  };
+//
+//  /*
+//  rpc Consume(google.protobuf.Any) returns (google.protobuf.Empty) { // <1>
+//    option (kalix.method).eventing.in = {
+//      topic:  "notifications"
+//    };
+//  }*/
+//
+//  rpc dealChangeProtoToTopic(com.example.deal.domain.DealState) returns (DealStateUpdated) {
+//    option (kalix.method).eventing.in = {
+//      event_sourced_entity: "deals"
+//    };
+//    option (kalix.method).eventing.out = {
+//      topic:  "deal_changes_proto3"
+//    };
+//  }
+//}
+//
+//message DealStateUpdated {
+//  string dealIdx = 1;
+//  string createdTimestamp = 2;
+//  string modifiedTimestamp = 3;
+//  string lifecycleStatus = 4;
+//  string brand = 5;
+//  string changedBy = 6;
+//  string status = 7;
+//}

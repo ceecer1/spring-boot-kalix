@@ -1,53 +1,53 @@
-syntax = "proto3";
-
-package com.example.deal.view;
-
-option java_outer_classname = "DealViewApi";
-
-import "com/example/deal/domain/deal_domain.proto";
-import "kalix/annotations.proto";
-import "google/api/annotations.proto";
-
-
-service DealViewService {
-  option (kalix.codegen) = {
-    view: {}
-  };
-
-  rpc OnUpdateState(com.example.deal.domain.DealState) returns (DealViewState) {
-    option (kalix.method).eventing.in = {
-      event_sourced_entity: "deals"
-    };
-    option (kalix.method).view.update = {
-      table: "deal_view_tbl"
-      transform_updates: true
-    };
-  }
-
-  rpc GetDeal(GetDealRequest) returns (DealResponse) {
-    option (kalix.method).view.query = {
-      query: "SELECT * AS data FROM deal_view_tbl WHERE dealIdx = :deal_identifier"
-    };
-    option (google.api.http) = {
-      get: "/deal/{deal_identifier}"
-    };
-  }
-}
-
-message GetDealRequest {
-  string deal_identifier = 1;
-}
-
-message DealViewState {
-  string dealIdx = 1;
-  string createdTimestamp = 2;
-  string modifiedTimestamp = 3;
-  string lifecycleStatus = 4;
-  string brand = 5;
-  string channel = 6;
-  string status = 7;
-}
-
-message DealResponse {
-  repeated DealViewState data = 1;
-}
+//syntax = "proto3";
+//
+//package com.example.deal.view;
+//
+//option java_outer_classname = "DealViewApi";
+//
+//import "com/example/deal/domain/deal_domain.proto";
+//import "kalix/annotations.proto";
+//import "google/api/annotations.proto";
+//
+//
+//service DealViewService {
+//  option (kalix.codegen) = {
+//    view: {}
+//  };
+//
+//  rpc OnUpdateState(com.example.deal.domain.DealState) returns (DealViewState) {
+//    option (kalix.method).eventing.in = {
+//      event_sourced_entity: "deals"
+//    };
+//    option (kalix.method).view.update = {
+//      table: "deal_view_tbl"
+//      transform_updates: true
+//    };
+//  }
+//
+//  rpc GetDeal(GetDealRequest) returns (DealResponse) {
+//    option (kalix.method).view.query = {
+//      query: "SELECT * AS data FROM deal_view_tbl WHERE dealIdx = :deal_identifier"
+//    };
+//    option (google.api.http) = {
+//      get: "/deal/{deal_identifier}"
+//    };
+//  }
+//}
+//
+//message GetDealRequest {
+//  string deal_identifier = 1;
+//}
+//
+//message DealViewState {
+//  string dealIdx = 1;
+//  string createdTimestamp = 2;
+//  string modifiedTimestamp = 3;
+//  string lifecycleStatus = 4;
+//  string brand = 5;
+//  string channel = 6;
+//  string status = 7;
+//}
+//
+//message DealResponse {
+//  repeated DealViewState data = 1;
+//}
