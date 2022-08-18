@@ -1,5 +1,6 @@
 package com.example.deal.action;
 
+import com.example.deal.action.base.AbstractDealTopicJsonServiceAction;
 import com.example.deal.domain.DealDomain;
 import com.google.protobuf.Any;
 import kalix.javasdk.JsonSupport;

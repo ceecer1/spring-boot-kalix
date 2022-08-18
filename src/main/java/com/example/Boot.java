@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import com.example.deal.action.DealTopicJsonServiceAction;
 import com.example.deal.domain.DealEntity;
+import com.example.deal.view.DealViewServiceImpl;
 import kalix.javasdk.Kalix;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,8 @@ public class Boot {
         // `new Kalix()` instance.
         return KalixFactory.withComponents(
                 DealEntity::new,
-                DealTopicJsonServiceAction::new);
-//                DealViewServiceImpl::new);
+                DealTopicJsonServiceAction::new,
+                DealViewServiceImpl::new);
     }
 
     public static void main(String[] args) {

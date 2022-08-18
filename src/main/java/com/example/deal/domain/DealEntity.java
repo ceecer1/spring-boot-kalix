@@ -1,6 +1,8 @@
 package com.example.deal.domain;
 
 import com.example.deal.api.DealApi;
+import com.example.deal.domain.base.AbstractDealEntity;
+import com.example.util.DealStates;
 import com.google.protobuf.Empty;
 import kalix.javasdk.eventsourcedentity.EventSourcedEntity;
 import kalix.javasdk.eventsourcedentity.EventSourcedEntity.Effect;
@@ -24,6 +26,7 @@ public class DealEntity extends AbstractDealEntity {
   private final String entityId;
 
   public DealEntity(EventSourcedEntityContext context) {
+    System.out.printf("Context entity id is = %s%n", context.entityId());
     this.entityId = context.entityId();
   }
 
@@ -39,7 +42,7 @@ public class DealEntity extends AbstractDealEntity {
     DealDomain.DealSubmitted state = DealDomain.DealSubmitted.newBuilder()
             .setDealIdx(this.entityId)
             .setModifiedTimestamp(Instant.now().toString())
-            .setStatus(dealRequest.getStatus())
+            .setStatus(DealStates.SUBMITTED.name())
             .build();
     return effects().emitEvent(state).thenReply(newState -> Empty.getDefaultInstance());
   }
