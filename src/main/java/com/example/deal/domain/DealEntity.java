@@ -26,7 +26,7 @@ public class DealEntity extends AbstractDealEntity {
   private final String entityId;
 
   public DealEntity(EventSourcedEntityContext context) {
-    System.out.printf("Context entity id is = %s%n", context.entityId());
+    LOG.info(String.format("DealEntity constructor, Context entity id is = %s", context.entityId()));
     this.entityId = context.entityId();
   }
 
@@ -37,7 +37,7 @@ public class DealEntity extends AbstractDealEntity {
 
   @Override
   public Effect<Empty> createDeal(DealDomain.DealState currentState, DealApi.DealRequest dealRequest) {
-    LOG.info("During create deal");
+    LOG.info("During CREATE deal");
 //    DealDomain.DealState state = convertDealRequestToDomain(dealRequest);
     DealDomain.DealSubmitted state = DealDomain.DealSubmitted.newBuilder()
             .setDealIdx(this.entityId)
@@ -90,6 +90,7 @@ public class DealEntity extends AbstractDealEntity {
 
   @Override
   public Effect<DealApi.DealStatus> getDeal(DealDomain.DealState currentState, DealApi.GetDealRequest getDealRequest) {
+    LOG.info("During GET deal");
     if (currentState.getDealIdx().equals("")) {
       return effects().error("Deal " + getDealRequest.getDealIdx() + " has not been created.");
     } else {
@@ -101,7 +102,7 @@ public class DealEntity extends AbstractDealEntity {
   public DealDomain.DealState dealSubmitted(DealDomain.DealState currentState, DealDomain.DealSubmitted dealSubmitted) {
     LOG.info(String.format("Deal submitted event with id %s", dealSubmitted.getDealIdx()));
     return DealDomain.DealState.newBuilder()
-            .setDealIdx(currentState.getDealIdx())
+            .setDealIdx(dealSubmitted.getDealIdx())
             .setCreatedTimestamp(currentState.getCreatedTimestamp())
             .setModifiedTimestamp(dealSubmitted.getModifiedTimestamp())
             .setLifecycleStatus(currentState.getLifecycleStatus())

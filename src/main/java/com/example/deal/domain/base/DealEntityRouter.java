@@ -3,9 +3,20 @@ package com.example.deal.domain.base;
 import com.example.deal.api.DealApi;
 import com.example.deal.domain.DealDomain;
 import com.example.deal.domain.DealEntity;
+import com.example.fsm.SimpleStateMachineConfiguration;
+import com.example.util.DealEvents;
+import com.example.util.DealStates;
 import kalix.javasdk.eventsourcedentity.CommandContext;
 import kalix.javasdk.eventsourcedentity.EventSourcedEntity;
 import kalix.javasdk.impl.eventsourcedentity.EventSourcedEntityRouter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.statemachine.StateMachine;
+import org.springframework.statemachine.config.StateMachineFactory;
+import org.springframework.stereotype.Component;
 
 // This code is managed by Kalix tooling.
 // It will be re-generated to reflect any changes to your protobuf definitions.
@@ -17,8 +28,14 @@ import kalix.javasdk.impl.eventsourcedentity.EventSourcedEntityRouter;
  */
 public class DealEntityRouter extends EventSourcedEntityRouter<DealDomain.DealState, DealEntity> {
 
+  private static final Logger LOG = LoggerFactory.getLogger(DealEntityRouter.class);
+
   public DealEntityRouter(DealEntity entity) {
     super(entity);
+
+    LOG.info("#############");
+    LOG.info("AT DealEntityRouter constructor, entity injected");
+    LOG.info("#############");
   }
 
   @Override
